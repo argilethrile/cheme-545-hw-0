@@ -21,4 +21,20 @@ If no exception is thrown, the function tries to pull the list from the unit_nam
 
 The function will return a list with entries in the form "compoundname-concentration-weight" where weight = molecular weight * concentration. If a particular compoundname is not found in the molecular_weights dictionary, the entry for that compound is listed as "unknown". 
 
+Example usage:
+```
+molecular_weights = {
+    'NaCl': 58.44,
+    'H2SO4': 98.079,
+    'NaOH': 40.00,
+    'KMnO4': 158.034,
+    'CH3COOH': 60.052
+}
+
+solutions_needed = ['NaCl-0.5M', 'H2SO4-0.25M', 'NaOH-1M', 'KCl-0.1M', 'CH3COOH-0.3M']
+
+calculate_solution_weight(molecular_weights, solutions_needed)
+```
+This will return a list: `['NaCl-0.5M-29.22g', 'H2SO4-0.25M-24.51975g', 'NaOH-1M-40.0g', 'unknown', 'CH3COOH-0.3M-18.0156g']`
+
 I iterated through the list first. For each entry, I split the string on "-", then got the strings for compoundname and concentration. I used regex to get just the int or float from the concentration string. I then used the try-except method. If the dictionary has a key that matched compoundname, weight is calculated according to the formula above and the new entry string is constructed and added to the output list. If a KeyError is thrown, "unknown" is added to the output list.
